@@ -1,21 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col w-100">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                <div class="card-header">Dashboard</div>
+                    <ul>
+                        @foreach($todoLists as $todoList)
+                            <!-- <li>
+                                <div>{{ $todoList->title }}</div>
+                                <form id='delete-todolist-{{ $todoList->id }}' action='/todolists/{{ $todoList->id }}' method='post'>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" form='delete-todolist-{{ $todoList->id }}' value="Delete">Delete</button>
+                                </form>
+                            </li> -->
+                            <todolist :todo-list="{{$todoList}}"></todolist>
+                        @endforeach
+                    </ul>
                 </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <a href="/todolists">+ Fuct Shits</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <pre>{{  $user  }}</pre>
             </div>
         </div>
     </div>
